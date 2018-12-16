@@ -29,7 +29,8 @@ public class GivenIHaveReceivedABoardTest {
             new InvalidBoard(new char[] { 'W', 'W' }),
             new InvalidBoard(new char[] { 'W', 'S' }),
             new InvalidBoard(new char[] { 'W', 'E' }),
-            new InvalidBoard(new char[0])
+            new InvalidBoard(new char[0]),
+            new InvalidBoard(null)
         };
     }
 
