@@ -1,27 +1,30 @@
 public class Follower {
 
-    char[] board = null;
-    boolean hasBoard = false;
-    int countE = 0;
-    int countS = 0;
+    private final char[] board;
 
     Follower(char[] board) throws Exception {
+        if (board == null || board.length == 0) {
+            throw new Exception("Missing required Maze");
+        }
+
         this.board = board;
+
+        int countE = 0;
+        int countS = 0;
         for (int index = 0; index < this.board.length; index++) {
             if (this.board[index] == 'S') {
-                ++this.countS;
+                ++countS;
             } else if (this.board[index] == 'E') {
-                ++this.countE;
+                ++countE;
             }
         }
 
-        if (this.countS != 1 || this.countE != 1) {
-            throw new Exception();
+        if (countS != 1 || countE != 1) {
+            throw new Exception("Missing required Start or End location");
         }
     }
 
     public boolean hasBoard() {
-        // return this.hasBoard;
         return true;
     }
 }

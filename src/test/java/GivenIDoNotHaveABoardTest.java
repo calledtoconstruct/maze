@@ -4,8 +4,8 @@ import org.junit.Before;
 
 public class GivenIDoNotHaveABoardTest {
 
-    Follower follower = null;
-    char[] board;
+    private final char[] board = new char[] { 'S', 'E' };
+    private Follower follower = null;
 
     @Before
     public void whenIAmInstantiatedWithABoard() throws Exception {

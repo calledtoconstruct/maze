@@ -5,9 +5,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 class InvalidBoard {
-    private char[] board;
+    private final char[] board;
 
-    public InvalidBoard(char[] board) {
+    public InvalidBoard(final char[] board) {
         this.board = board;
     }
 
@@ -19,28 +19,28 @@ class InvalidBoard {
 @RunWith(Parameterized.class)
 public class GivenIHaveReceivedABoardTest {
 
-    Follower follower = null;
-    char[] board;
-
-    Exception thrown = null;
+    private final char[] board;
+    
+    private Exception thrown;
 
     @Parameterized.Parameters()
     public static InvalidBoard[] GetParameters() {
         return new InvalidBoard[] {
             new InvalidBoard(new char[] { 'W', 'W' }),
             new InvalidBoard(new char[] { 'W', 'S' }),
-            new InvalidBoard(new char[] { 'W', 'E' })
+            new InvalidBoard(new char[] { 'W', 'E' }),
+            new InvalidBoard(new char[0])
         };
     }
 
-    public GivenIHaveReceivedABoardTest(char[] board) {
-        this.board = board;
+    public GivenIHaveReceivedABoardTest(final InvalidBoard invalidBoard) {
+        this.board = invalidBoard.GetBoard();
     }
 
     @Before
     public void whenIAmInstantiatedWithAInvalidBoard() {
         try {
-            this.follower = new Follower(this.board);
+            final Follower follower = new Follower(this.board);
         } catch (Exception ex) {
             thrown = ex;
         }
