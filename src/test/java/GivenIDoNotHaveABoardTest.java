@@ -8,7 +8,7 @@ public class GivenIDoNotHaveABoardTest {
     char[] board;
 
     @Before
-    public void whenIAmInstantiatedWithABoard() {
+    public void whenIAmInstantiatedWithABoard() throws Exception {
         this.follower = new Follower(this.board);
     }
 
