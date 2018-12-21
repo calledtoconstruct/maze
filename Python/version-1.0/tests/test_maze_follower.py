@@ -21,3 +21,8 @@ def test_given_i_have_received_a_board_that_is_missing_an_end_position_when_eval
         assert(False)
     except ValueError:
         return
+
+def test_given_i_have_received_a_valid_board_when_stepping_then_no_error_is_thrown():
+    maze = "SE"
+    result = step(maze)
+    assert(False)
