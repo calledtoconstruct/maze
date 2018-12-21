@@ -13,3 +13,11 @@ def test_given_i_have_received_a_board_that_is_missing_a_start_position_when_eva
         assert(False)
     except ValueError:
         return
+
+def test_given_i_have_received_a_board_that_is_missing_an_end_position_when_evaluating_then_an_exception_is_thrown():
+    maze = "S"
+    try:
+        result = step(maze)
+        assert(False)
+    except ValueError:
+        return

@@ -4,4 +4,6 @@ def test():
     return 100
 
 def step(maze):
-    raise ValueError()
+    if "S" not in maze:
+        raise ValueError()
+    return
