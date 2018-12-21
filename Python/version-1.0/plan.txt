@@ -7,16 +7,7 @@
 
 US1) As a maze follower,
     I want the ability to receive a maze with a 'S' start and 'E' end point, 'W' walls, and ' ' pathways,
-    So that I can follow the path from start to end
-
-    Given: I don't have a board,
-    When: I'm instantiated with a board 
-    Then: I store a reference to the board (for future use)
-
-    Given: I have received a board
-    And: it contains both 1 S and 1 E
-    When: I validate the board
-    Then: No error is thrown
+    So that I can follow the path from start to end\
 
     Given: I have received a board
     And: it lacks both 1 S and 1 E
