@@ -62,3 +62,11 @@ def test_given_i_am_at_a_known_location_when_stepping_then_the_position_of_the_e
         assert(False)
     except ValueError:
         return
+
+def test_given_i_am_at_a_known_location_when_stepping_then_the_location_i_move_from_is_filled_with_a_breadcrum():
+    maze = [
+        "WSW",
+        "W E"
+    ]
+    result, x, y = step(maze, 1, 0)
+    assert(maze[0][1] == '*')

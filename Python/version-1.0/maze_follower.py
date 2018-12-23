@@ -23,5 +23,6 @@ def step(maze, cx = -1, cy = -1):
             if current == ' ':
                 if x in range(cx-1, 3):
                     if y in range(cy-1, 3):
+                        maze[cy] = maze[cy][0:x] + '*' + maze[cy][x+1:]
                         return current, x, y
-    return " ", 1, 1
+    raise ValueError
