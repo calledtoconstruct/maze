@@ -1,10 +1,5 @@
-"#" 
 
-from maze_follower import test, step, traverse
-
-def test_test():
-    result = test()
-    assert(result == 100)
+from maze_follower import step, traverse
 
 def test_given_i_have_received_a_board_that_is_missing_a_start_position_when_evaluating_then_an_exception_is_thrown():
     maze = ["E"]
@@ -44,8 +39,8 @@ def test_given_an_unnavigated_board_when_stepping_then_the_start_position_is_ret
 
 def test_given_i_am_at_a_known_location_when_stepping_then_the_position_of_the_empty_space_is_returned():
     scenario = [
-        [ [ "WS", "W E" ], 1, 0, 1, 1 ],
-        [ [ "WWE", "W W", "W S" ], 2, 2, 1, 2 ]
+        ( [ "WS", "W E" ], 1, 0, 1, 1 ),
+        ( [ "WWE", "W W", "W S" ], 2, 2, 1, 2 )
     ]
     for current in scenario:
         maze, sx, sy, ex, ey = current

@@ -1,7 +1,3 @@
-"#" 
-
-def test():
-    return 100
 
 def validate(maze):
     start = 0
