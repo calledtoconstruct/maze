@@ -3,7 +3,7 @@
 def test():
     return 100
 
-def step(maze, x, y):
+def step(maze, cx = -1, cy = -1):
     start = 0
     end = 0
     for line in maze:
@@ -13,8 +13,9 @@ def step(maze, x, y):
             end = end + 1
     if start == 0 or end == 0:
         raise ValueError()
-    y = 0       
-    for line in maze:
-        y = y + 1
-        
-    return "S", 1, 0
+    if cx == -1 or cy == -1:
+        for y, line in enumerate(maze):
+            for x in range(len(line)):
+                if line[x] == 'S':
+                    return "S", x, y
+    return " ", 1, 1
