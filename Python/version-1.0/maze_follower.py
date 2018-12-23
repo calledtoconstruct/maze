@@ -15,7 +15,7 @@ def step(maze, cx = -1, cy = -1):
         raise ValueError()
     if cx == -1 or cy == -1:
         for y, line in enumerate(maze):
-            for x in range(len(line)):
-                if line[x] == 'S':
-                    return "S", x, y
+            for x, current in enumerate(line):
+                if current == 'S':
+                    return current, x, y
     return " ", 1, 1
