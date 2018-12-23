@@ -63,6 +63,15 @@ US5) As a maze follower,
     I want the ability to detect when I have reached the 'E' end of the maze,
     So that I can declare victory!
 
+    Given: Our current location is known,
+    And: an adjacent endpoint exists,
+    When: I move to the adjancent endpoint,
+    Then: 'Victory!' is returned.
+
+US6) As a maze designer,
+    I want the ability to execute a maze follower,
+    So that my maze will be traversed.
+
 Stretch Goal: Write additional user stories
 
 Idea) Have the ability to detect a dead-end, backtrack and look for an alternate path
