@@ -1,6 +1,6 @@
 "#" 
 
-from maze_follower import test, step
+from maze_follower import test, step, traverse
 
 def test_test():
     result = test()
@@ -94,3 +94,15 @@ def test_given_i_am_at_a_known_location_and_the_endpoint_is_adjacent_when_steppi
     assert(result == "Victory!")
     assert(x == 2)
     assert(y == 1)
+
+def test_given_a_valid_maze_when_enumerating_each_step_then_victory_is_achieved():
+    maze = [
+        "WWWWWWWWWWWW",
+        "WS         W",
+        "WWWWWWWWWW W",
+        "W          W",
+        "WEWWWWWWWWWW",
+        "WWW"
+    ]
+    result = traverse(maze)
+    assert(result == "Victory!")

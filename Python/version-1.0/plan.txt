@@ -72,6 +72,10 @@ US6) As a maze designer,
     I want the ability to execute a maze follower,
     So that my maze will be traversed.
 
+    Given: A valid maze with a start position and an end position,
+    When: I loop through the steps,
+    Then: Victory is achieved!
+
 Stretch Goal: Write additional user stories
 
 Idea) Have the ability to detect a dead-end, backtrack and look for an alternate path
