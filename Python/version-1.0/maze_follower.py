@@ -18,4 +18,10 @@ def step(maze, cx = -1, cy = -1):
             for x, current in enumerate(line):
                 if current == 'S':
                     return current, x, y
+    for y, line in enumerate(maze):
+        for x, current in enumerate(line):
+            if current == ' ':
+                if x in range(cx-1, 3):
+                    if y in range(cy-1, 3):
+                        return current, x, y
     return " ", 1, 1

@@ -51,3 +51,14 @@ def test_given_i_am_at_a_known_location_when_stepping_then_the_position_of_the_e
     assert(result == " ")
     assert(x == 1)
     assert(y == 1)
+
+def test_given_i_am_at_a_known_location_when_stepping_then_the_position_of_the_empty_space_is_returned():
+    maze = [
+        "WSW",
+        "WWE"
+    ]
+    try:
+        result, x, y = step(maze, 1, 0)
+        assert(False)
+    except ValueError:
+        return
