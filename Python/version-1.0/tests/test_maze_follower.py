@@ -104,5 +104,6 @@ def test_given_a_valid_maze_when_enumerating_each_step_then_victory_is_achieved(
         "WEWWWWWWWWWW",
         "WWW"
     ]
-    result = traverse(maze)
+    result, breadcrums = traverse(maze)
     assert(result == "Victory!")
+    assert(breadcrums == 21)
