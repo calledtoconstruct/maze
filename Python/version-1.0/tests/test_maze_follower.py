@@ -43,14 +43,16 @@ def test_given_an_unnavigated_board_when_stepping_then_the_start_position_is_ret
     assert(y == 0)
 
 def test_given_i_am_at_a_known_location_when_stepping_then_the_position_of_the_empty_space_is_returned():
-    maze = [
-        "WS",
-        "W E"
+    scenario = [
+        [ [ "WS", "W E" ], 1, 0, 1, 1 ],
+        [ [ "WWE", "W W", "W S" ], 2, 2, 1, 2 ]
     ]
-    result, x, y = step(maze, 1, 0)
-    assert(result == " ")
-    assert(x == 1)
-    assert(y == 1)
+    for current in scenario:
+        maze, sx, sy, ex, ey = current
+        result, x, y = step(maze, sx, sy)
+        assert(result == " ")
+        assert(x == ex)
+        assert(y == ey)
 
 def test_given_i_am_at_a_known_location_when_stepping_then_an_error_is_raised():
     maze = [
@@ -104,6 +106,29 @@ def test_given_a_valid_maze_when_enumerating_each_step_then_victory_is_achieved(
         "WEWWWWWWWWWW",
         "WWW"
     ]
-    result, breadcrums = traverse(maze)
+    result, breadcrums = traverse(maze, step)
     assert(result == "Victory!")
     assert(breadcrums == 21)
+
+step_called = False
+
+def my_step(maze, x = -1, y = -1):
+    global step_called
+    step_called = True
+    return "Victory!", 100, 200
+
+def test_given_a_valid_maze_when_enumerating_each_step_then_victory_is_achieved():
+    global step_called
+    maze = [
+        "WWWWWWWWWWW",
+        "WS        W",
+        "WWWWWWWWW W",
+        "W         W",
+        "WEWWWWWWWWW",
+        "WWW"
+    ]
+    result, breadcrums = traverse(maze, my_step)
+    assert(step_called == True)
+    result, breadcrums = traverse(maze, step)
+    assert(result == "Victory!")
+    assert(breadcrums == 19)
