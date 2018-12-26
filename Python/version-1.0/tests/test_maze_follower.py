@@ -135,3 +135,16 @@ def test_given_i_am_at_a_known_location_and_no_options_exist_when_stepping_then_
     ]
     result, x, y, options = step(maze, 1, 1)
     assert(result == "D")
+
+def test_given_a_valid_maze_with_a_dead_end_when_enumerating_each_step_then_victory_is_achieved():
+    maze = [
+        "WWWWWWWWWWWW",
+        "W S        W",
+        "W WWWWWWWW W",
+        "W W        W",
+        "WWWEWWWWWWWW",
+        "  WWW"
+    ]
+    result, breadcrums = traverse(maze, step)
+    assert(result == "Victory!")
+    assert(breadcrums == 21)

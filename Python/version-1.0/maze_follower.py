@@ -41,4 +41,6 @@ def traverse(maze, step):
     while result != "Victory!":
         result, x, y, options = step(maze, x, y)
         count = count + 1
+        if result == 'D':
+            break
     return result, count
