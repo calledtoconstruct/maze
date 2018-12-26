@@ -126,16 +126,14 @@ def test_given_a_valid_maze_when_enumerating_each_step_then_the_step_method_is_i
     assert(step_called == True)
 
 def test_given_i_am_at_a_known_location_and_two_options_exist_when_stepping_then_the_first_option_is_chosen_and_the_other_option_is_returned():
-    maze = [
-        "W*WW",
-        "WC W",
-        "W WW",
-        "WEWW",
-        "WWWW"
+    scenarios = [
+        ([ "W*WW", "WC W", "W WW", "WEWW", "WWWW" ], 1, 1, 2, 1, 1, 1, 2),
+        ([ "WW*WW", "W C W", "W W W", "WEWWW", "WWWW" ], 2, 1, 1, 1, 1, 3, 1)
     ]
-    result, x, y, options = step(maze, 1, 1)
-    assert(result == " ")
-    assert(x == 2)
-    assert(y == 1)
-    assert(len(options) == 1)
-    assert(options[0] == (1, 3))
+    for maze, cx, cy, nx, ny, l, fox, foy in scenarios:
+        result, x, y, options = step(maze, cx, cy)
+        assert(result == " ")
+        assert(x == nx)
+        assert(y == ny)
+        assert(len(options) == l)
+        assert(options[0] == (fox, foy))
