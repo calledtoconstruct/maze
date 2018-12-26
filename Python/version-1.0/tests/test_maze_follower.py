@@ -112,7 +112,7 @@ def my_step(maze, x = -1, y = -1):
     step_called = True
     return "Victory!", 100, 200
 
-def test_given_a_valid_maze_when_enumerating_each_step_then_victory_is_achieved():
+def test_given_a_valid_maze_when_enumerating_each_step_then_the_step_method_is_invoked():
     global step_called
     maze = [
         "WWWWWWWWWWW",
@@ -122,8 +122,5 @@ def test_given_a_valid_maze_when_enumerating_each_step_then_victory_is_achieved(
         "WEWWWWWWWWW",
         "WWW"
     ]
-    result, breadcrums = traverse(maze, my_step)
+    traverse(maze, my_step)
     assert(step_called == True)
-    result, breadcrums = traverse(maze, step)
-    assert(result == "Victory!")
-    assert(breadcrums == 19)

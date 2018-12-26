@@ -76,6 +76,30 @@ US6) As a maze designer,
     When: I loop through the steps,
     Then: Victory is achieved!
 
+
+
+US7) As a maze designer,
+    I want the ability to execute a maze follower that can backtrack when a dead-end is reached,
+    So that I can build more elaborate mazes.
+
+    Given: the current position is known, 
+    And: two options are available,
+    When: stepping,
+    Then: the first option is chosen,
+    And: the other option is returned.
+
+    Given: the current position is known,
+    And: no options are available,
+    When: stepping,
+    Then: indicate that a dead-end has been reached.
+
+    Given: A valid maze with a start position,
+    And: an end position,
+    And: at least one dead-end,
+    When: I loop through the steps,
+    Then: Victory is achieved!
+
+
 Stretch Goal: Write additional user stories
 
 Idea) Have the ability to detect a dead-end, backtrack and look for an alternate path

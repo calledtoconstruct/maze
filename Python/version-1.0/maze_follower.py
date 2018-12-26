@@ -22,14 +22,13 @@ def step(maze, cx = -1, cy = -1):
         return start(maze)
     for y, line in enumerate(maze):
         for x, current in enumerate(line):
-            if cx == x or cy == y:
-                if x == cx - 1 or x == cx + 1 or y == cy - 1 or y == cy + 1:
-                    if current == 'E':
-                        return "Victory!", x, y
-                    if current == ' ':
-                        maze[cy] = maze[cy][0:cx] + '*' + maze[cy][cx+1:]
-                        maze[y] = maze[y][0:x] + 'C' + maze[y][x+1:]
-                        return current, x, y
+            if (cx == x and y in [cy-1, cy+1]) or (cy == y and x in [cx-1, cx+1]):
+                if current == 'E':
+                    return "Victory!", x, y
+                if current == ' ':
+                    maze[cy] = maze[cy][0:cx] + '*' + maze[cy][cx+1:]
+                    maze[y] = maze[y][0:x] + 'C' + maze[y][x+1:]
+                    return current, x, y
     raise ValueError
 
 def traverse(maze, step):
