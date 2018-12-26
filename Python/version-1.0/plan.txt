@@ -99,6 +99,12 @@ US7) As a maze designer,
     When: I loop through the steps,
     Then: Victory is achieved!
 
+    Given: A valid maze with a start position,
+    And: an end position,
+    And: the end is not reachable from the start,
+    When: I loop through the steps,
+    Then: an error is raised.
+
 
 Stretch Goal: Write additional user stories
 

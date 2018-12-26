@@ -36,11 +36,18 @@ def step(maze, cx = -1, cy = -1):
     return 'D', 0, 0, []
 
 def traverse(maze, step):
+    backtrack = []
     count = 0
     result, x, y, options = step(maze)
     while result != "Victory!":
+        cx = x
+        cy = y
         result, x, y, options = step(maze, x, y)
+        if (len(options) > 0):
+            backtrack.append((cx, cy))
         count = count + 1
         if result == 'D':
-            break
+            count = count - 1
+            last_branch = backtrack.pop()
+            x, y = last_branch
     return result, count
