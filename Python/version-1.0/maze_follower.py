@@ -28,7 +28,7 @@ def step(maze, cx = -1, cy = -1):
                 if current == ' ':
                     maze[cy] = maze[cy][0:cx] + '*' + maze[cy][cx+1:]
                     maze[y] = maze[y][0:x] + 'C' + maze[y][x+1:]
-                    return current, x, y, []
+                    return current, x, y, [(1, 3)]
     raise ValueError
 
 def traverse(maze, step):
