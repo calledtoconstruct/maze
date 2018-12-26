@@ -14,7 +14,7 @@ def start(maze):
     for y, line in enumerate(maze):
         for x, current in enumerate(line):
             if current == 'S':
-                return current, x, y
+                return current, x, y, []
 
 def step(maze, cx = -1, cy = -1):
     if cx == -1 or cy == -1:
@@ -24,17 +24,17 @@ def step(maze, cx = -1, cy = -1):
         for x, current in enumerate(line):
             if (cx == x and y in [cy-1, cy+1]) or (cy == y and x in [cx-1, cx+1]):
                 if current == 'E':
-                    return "Victory!", x, y
+                    return "Victory!", x, y, []
                 if current == ' ':
                     maze[cy] = maze[cy][0:cx] + '*' + maze[cy][cx+1:]
                     maze[y] = maze[y][0:x] + 'C' + maze[y][x+1:]
-                    return current, x, y
+                    return current, x, y, []
     raise ValueError
 
 def traverse(maze, step):
     count = 0
-    result, x, y = step(maze)
+    result, x, y, options = step(maze)
     while result != "Victory!":
-        result, x, y = step(maze, x, y)
+        result, x, y, options = step(maze, x, y)
         count = count + 1
     return result, count
