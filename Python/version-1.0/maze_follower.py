@@ -47,6 +47,8 @@ def traverse(maze, step):
             backtrack.append((cx, cy))
         count = count + 1
         if result == 'D':
+            if len(backtrack) < 1:
+                raise ValueError
             count = count - 1
             last_branch = backtrack.pop()
             x, y = last_branch

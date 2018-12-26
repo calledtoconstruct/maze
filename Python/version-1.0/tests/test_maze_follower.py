@@ -148,3 +148,18 @@ def test_given_a_valid_maze_with_a_dead_end_when_enumerating_each_step_then_vict
     result, breadcrums = traverse(maze, step)
     assert(result == "Victory!")
     assert(breadcrums == 21)
+
+def test_given_a_valid_maze_with_no_path_to_victory_when_enumerating_each_step_then_an_error_is_raised():
+    maze = [
+        "WWWWWWWWWWWW",
+        "W S        W",
+        "W WWWWWWWW W",
+        "W WWW      W",
+        "WWWEWWWWWWWW",
+        "  WWW"
+    ]
+    try:
+        result, breadcrums = traverse(maze, step)
+        assert(False)
+    except ValueError:
+        return
