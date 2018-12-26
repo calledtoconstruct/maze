@@ -49,17 +49,6 @@ def test_given_i_am_at_a_known_location_when_stepping_then_the_position_of_the_e
         assert(x == ex)
         assert(y == ey)
 
-def test_given_i_am_at_a_known_location_and_no_option_exists_when_stepping_then_an_error_is_raised():
-    maze = [
-        "WSW",
-        "WWE"
-    ]
-    try:
-        result, x, y, options = step(maze, 1, 0)
-        assert(False)
-    except ValueError:
-        return
-
 def test_given_i_am_at_a_known_location_when_stepping_then_the_location_i_move_from_is_filled_with_a_breadcrum():
     maze = [
         "WSW",

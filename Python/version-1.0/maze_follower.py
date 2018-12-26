@@ -33,7 +33,7 @@ def step(maze, cx = -1, cy = -1):
         maze[cy] = maze[cy][0:cx] + '*' + maze[cy][cx+1:]
         maze[y] = maze[y][0:x] + 'C' + maze[y][x+1:]
         return ' ', x, y, options
-    raise ValueError
+    return 'D', 0, 0, []
 
 def traverse(maze, step):
     count = 0
