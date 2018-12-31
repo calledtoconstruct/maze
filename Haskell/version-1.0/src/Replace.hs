@@ -4,14 +4,15 @@ module Replace (
 ) where
 
   import Enumerate
-  import Maze
+  import Types
 
-  replaceInLine :: Int -> Int -> Char -> Int -> String -> String
-  replaceInLine replaceX replaceY newValue y line = map
+  replaceInLine :: Position -> Char -> Int -> String -> String
+  replaceInLine replace newValue y line = map
     (\(x, value) -> if replaceX == x && replaceY == y then newValue else value)
     $ enumerate line
+    where (replaceX, replaceY) = replace
 
-  replaceInMaze :: Maze -> Int -> Int -> Char -> Maze
-  replaceInMaze maze replaceX replaceY newValue = map
-    (\(y, line) -> replaceInLine replaceX replaceY newValue y line)
+  replaceInMaze :: Maze -> Position -> Char -> Maze
+  replaceInMaze maze replace newValue = map
+    (\(y, line) -> replaceInLine replace newValue y line)
     $ enumerate maze

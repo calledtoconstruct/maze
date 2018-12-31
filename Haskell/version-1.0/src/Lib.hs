@@ -1,54 +1,73 @@
 module Lib ( run ) where
 
 import Enumerate
-import Maze
 import Find
 import Replace
+import Types
 
-startPositionIn :: (Char, Int, Int) -> Bool
-startPositionIn (value, _, _) = value == 'S'
+import Data.List      (sortBy)
+import Data.Function  (on)
 
-endPositionIn :: (Char, Int, Int) -> Bool
-endPositionIn (value, _, _) = value == 'E'
+startPositionIn :: MazePosition -> Bool
+startPositionIn (value, _) = value == 'S'
 
-nextMoveIn :: (Char, Int, Int, Int, Int) -> Bool
-nextMoveIn (value, fromX, fromY, toX, toY) = isPathOrEnd && (isHorizontal || isVertical)
+endPositionIn :: MazePosition -> Bool
+endPositionIn (value, _) = value == 'E'
+
+nextMoveIn :: RelativeMazePosition -> Bool
+nextMoveIn (value, from, to) = isPathOrEnd && (isHorizontal || isVertical)
   where isVertical = abs(toY - fromY) == 1 && fromX == toX
         isHorizontal = abs(toX - fromX) == 1 && fromY == toY
         isPathOrEnd = value == 'E' || value == ' '
+        (fromX, fromY) = from
+        (toX, toY) = to
 
-hasOne :: ((Char, Int, Int) -> Bool) -> Maze -> Bool
+hasOne :: (MazePosition -> Bool) -> Maze -> Bool
 hasOne somethingIn maze = (length $ concat $ find somethingIn maze) == 1
 
-hasNext :: Maze -> Int -> Int -> Bool
-hasNext maze currentX currentY = (null $ concat $ findRelative nextMoveIn maze currentX currentY) == False
+hasNext :: Maze -> Position -> Bool
+hasNext maze current = (null $ concat $ findRelative nextMoveIn maze current) == False
 
-atTheEnd :: Maze -> Int -> Int -> Bool
-atTheEnd maze currentX currentY = endX == currentX && endY == currentY
-  where (_, endX, endY) = head $ concat $ find endPositionIn maze
+atTheEnd :: Maze -> Position -> Bool
+atTheEnd maze current = endX == currentX && endY == currentY
+  where (_, (endX, endY)) = head $ concat $ find endPositionIn maze
+        (currentX, currentY) = current
 
-leaveBreadcrumb :: Maze -> Int -> Int -> Maze
-leaveBreadcrumb maze x y = replaceInMaze maze x y '*'
+leaveBreadcrumb :: Maze -> Position -> Maze
+leaveBreadcrumb maze location = replaceInMaze maze location '*'
 
-move :: Maze -> Int -> Int -> Result
-move maze fromX fromY =
-  if canMove
-  then move updatedMaze toX toY
-  else if victory
-  then MazeComplete updatedMaze
-  else NoPath
-  where canMove = hasNext maze fromX fromY
-        updatedMaze = leaveBreadcrumb maze fromX fromY
-        (_, _, _, toX, toY) = head $ concat $ findRelative nextMoveIn updatedMaze fromX fromY
-        victory = atTheEnd maze fromX fromY
+extractToPosition :: RelativeMazePosition -> Position
+extractToPosition relativeMazePosition = (toX, toY)
+  where (_, _, (toX, toY)) = relativeMazePosition
+
+deadEnd :: Result -> Bool
+deadEnd result = result /= NoPath
+
+breadcrumbs :: Result -> Int
+breadcrumbs (MazeComplete maze) = length $ filter (== '*') $ concat maze
+
+move :: Maze -> Position -> Result
+move maze from =
+  if victory
+    then MazeComplete updatedMaze
+    else if failure
+      then NoPath
+      else head $ optimizedPaths
+  where victory = atTheEnd maze from
+        updatedMaze = leaveBreadcrumb maze from
+        options = concat $ findRelative nextMoveIn updatedMaze from
+        paths = move updatedMaze <$> extractToPosition <$> options
+        validPaths = filter deadEnd $ paths
+        failure = null $ validPaths
+        optimizedPaths = sortBy (compare `on` breadcrumbs) $ validPaths
 
 run :: Maze -> Result
 run maze =
   if hasStart && hasEnd
-  then move maze startX startY
+  then move maze (startX, startY)
   else if hasStart
   then NoEnd
   else NoStart
   where hasStart = hasOne startPositionIn maze
         hasEnd = hasOne endPositionIn maze
-        (_, startX, startY) = head $ concat $ find startPositionIn maze
+        (_, (startX, startY)) = head $ concat $ find startPositionIn maze

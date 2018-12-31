@@ -28,6 +28,10 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Types
+      Replace
+      Find
+      Enumerate
   other-modules:
       Paths_maze
   hs-source-dirs:

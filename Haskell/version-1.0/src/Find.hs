@@ -4,24 +4,25 @@ module Find (
 ) where
 
 import Enumerate
-import Maze
+import Types
 
-findInLine :: ((Char, Int, Int) -> Bool) -> Int -> String -> [(Char, Int, Int)]
+findInLine :: (MazePosition -> Bool) -> Int -> String -> [MazePosition]
 findInLine predicate y line = filter predicate $ map
-  (\(x, value) -> (value, x, y))
+  (\(x, value) -> (value, (x, y)))
   $ enumerate line
 
-find :: ((Char, Int, Int) -> Bool) -> Maze -> [[(Char, Int, Int)]]
+find :: (MazePosition -> Bool) -> Maze -> [[MazePosition]]
 find predicate maze = map
   (\(y, line) -> findInLine predicate y line)
   $ enumerate maze
 
-findRelativeInLine :: ((Char, Int, Int, Int, Int) -> Bool) -> Int -> Int -> Int -> String -> [(Char, Int, Int, Int, Int)]
-findRelativeInLine next cx cy y line = filter next $ map
-  (\(x, value) -> (value, cx, cy, x, y))
+findRelativeInLine :: (RelativeMazePosition -> Bool) -> Position -> Int -> String -> [RelativeMazePosition]
+findRelativeInLine next current y line = filter next $ map
+  (\(x, value) -> (value, (currentX, currentY), (x, y)))
   $ enumerate line
+  where (currentX, currentY) = current
 
-findRelative :: ((Char, Int, Int, Int, Int) -> Bool) -> Maze -> Int -> Int -> [[(Char, Int, Int, Int, Int)]]
-findRelative next maze cx cy = map
-  (\(y, line) -> findRelativeInLine next cx cy y line)
+findRelative :: (RelativeMazePosition -> Bool) -> Maze -> Position -> [[RelativeMazePosition]]
+findRelative next maze current = map
+  (\(y, line) -> findRelativeInLine next current y line)
   $ enumerate maze
