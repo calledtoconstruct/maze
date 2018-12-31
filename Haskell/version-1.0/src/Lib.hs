@@ -47,12 +47,10 @@ breadcrumbs :: Result -> Int
 breadcrumbs (MazeComplete maze) = length $ filter (== '*') $ concat maze
 
 move :: Maze -> Position -> Result
-move maze from =
-  if victory
-    then MazeComplete updatedMaze
-    else if failure
-      then NoPath
-      else head $ optimizedPaths
+move maze from
+  | victory             = MazeComplete updatedMaze
+  | failure             = NoPath
+  | otherwise           = head $ optimizedPaths
   where victory = atTheEnd maze from
         updatedMaze = leaveBreadcrumb maze from
         options = concat $ findRelative nextMoveIn updatedMaze from
@@ -62,12 +60,10 @@ move maze from =
         optimizedPaths = sortBy (compare `on` breadcrumbs) $ validPaths
 
 run :: Maze -> Result
-run maze =
-  if hasStart && hasEnd
-  then move maze (startX, startY)
-  else if hasStart
-  then NoEnd
-  else NoStart
+run maze
+  | hasStart && hasEnd  = move maze (startX, startY)
+  | hasStart            = NoEnd
+  | otherwise           = NoStart
   where hasStart = hasOne startPositionIn maze
         hasEnd = hasOne endPositionIn maze
         (_, (startX, startY)) = head $ concat $ find startPositionIn maze
