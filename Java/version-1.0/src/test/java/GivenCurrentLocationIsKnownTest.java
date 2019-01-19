@@ -64,23 +64,6 @@ public class GivenCurrentLocationIsKnownTest {
         assertNotEquals(thrown, null);
     }
 
-
-    // Before
-        // board = new char[][] {
-        //     {'S', ' ', ' ', 'E'},
-        //     {'W', 'W', 'W', 'W'}
-        // };
-    // After
-        // board = new char[][] {
-        //     {'*', 'C', ' ', 'E'},
-        //     {'W', 'W', 'W', 'W'}
-        // };
-    // After another step
-        // board = new char[][] {
-        //     {'*', '*', 'C', 'E'},
-        //     {'W', 'W', 'W', 'W'}
-        // };
-
     @Test
     public void whenMovingToTheNextSpaceThenBreadcrumbIsLeftBehind() throws Exception {
         board = new char[][] {
