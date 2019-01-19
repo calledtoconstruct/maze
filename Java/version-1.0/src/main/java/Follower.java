@@ -45,8 +45,22 @@ public class Follower {
     }
 
     public Location takeNextStep() {
-        current.setX(2);
-        current.setY(0);
+        for (int indexY = 0; indexY < this.board.length; indexY++) {
+            for (int indexX = 0; indexX < this.board[indexY].length; indexX++) {
+                boolean isAdjacent = (
+                    (current.getX() == indexX && (
+                        current.getY() == indexY - 1 || current.getY() == indexY + 1
+                    )) || (current.getY() == indexY && (
+                        current.getX() == indexX - 1 || current.getX() == indexX + 1
+                    ))
+                );
+                if (this.board[indexY][indexX] == ' ' && isAdjacent) {
+                    current.setX(indexX);
+                    current.setY(indexY);
+                    // return current;
+                }
+            }
+        }
         return current;
     }
 }

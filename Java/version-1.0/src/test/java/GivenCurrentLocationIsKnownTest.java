@@ -14,7 +14,7 @@ public class GivenCurrentLocationIsKnownTest {
     }
  
     @Test
-    public void thenAdjacentEmptyLocationIsReturned() throws Exception {
+    public void thenAdjacentEmptyLocationToTheLeftIsReturned() throws Exception {
         board = new char[][] {
             {'W', 'W', ' ', 'S'},
             {'W', 'W', 'E', 'W'}
@@ -23,6 +23,19 @@ public class GivenCurrentLocationIsKnownTest {
         this.follower.takeNextStep();
         expectedLocation.setX(2);
         expectedLocation.setY(0);
+        assertEquals(this.follower.getCurrentLocation(), expectedLocation);
+    }
+ 
+    @Test
+    public void thenAdjacentEmptyLocationBelowIsReturned() throws Exception {
+        board = new char[][] {
+            {'W', 'W', 'W', 'S'},
+            {'W', 'W', 'E', ' '}
+        };
+        this.follower = new Follower(this.board);
+        this.follower.takeNextStep();
+        expectedLocation.setX(3);
+        expectedLocation.setY(1);
         assertEquals(this.follower.getCurrentLocation(), expectedLocation);
     }
 }
