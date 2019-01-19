@@ -44,7 +44,7 @@ public class Follower {
         return current;
     }
 
-    public Location takeNextStep() {
+    public Location takeNextStep() throws Exception {
         for (int indexY = 0; indexY < this.board.length; indexY++) {
             for (int indexX = 0; indexX < this.board[indexY].length; indexX++) {
                 boolean isAdjacent = (
@@ -61,6 +61,6 @@ public class Follower {
                 }
             }
         }
-        return current;
+        throw new Exception();
     }
 }

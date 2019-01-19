@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,14 +8,9 @@ public class GivenCurrentLocationIsKnownTest {
     private char[][] board = null ;
     private Follower follower = null;
     private Location expectedLocation = new Location();
-
-    @BeforeEach
-    public void whenEvaluatingBoard() throws Exception {
-        // Establish any pre-conditions
-    }
  
     @Test
-    public void thenAdjacentEmptyLocationToTheLeftIsReturned() throws Exception {
+    public void whenEvaluatingBoardThenAdjacentEmptyLocationToTheLeftIsReturned() throws Exception {
         board = new char[][] {
             {'W', 'W', ' ', 'S'},
             {'W', 'W', 'E', 'W'}
@@ -27,7 +23,7 @@ public class GivenCurrentLocationIsKnownTest {
     }
  
     @Test
-    public void thenAdjacentEmptyLocationBelowIsReturned() throws Exception {
+    public void whenEvaluatingBoardThenAdjacentEmptyLocationBelowIsReturned() throws Exception {
         board = new char[][] {
             {'W', 'W', 'W', 'S'},
             {'W', 'W', 'E', ' '}
@@ -40,7 +36,7 @@ public class GivenCurrentLocationIsKnownTest {
     }
  
     @Test
-    public void thenOnlyTheFirstAdjacentEmptyLocationIsReturned() throws Exception {
+    public void whenEvaluatingBoardThenOnlyTheFirstAdjacentEmptyLocationIsReturned() throws Exception {
         board = new char[][] {
             {'S', ' ', ' ', 'E'},
             {'W', 'W', 'W', 'W'}
@@ -50,5 +46,22 @@ public class GivenCurrentLocationIsKnownTest {
         expectedLocation.setX(1);
         expectedLocation.setY(0);
         assertEquals(this.follower.getCurrentLocation(), expectedLocation);
+    }
+    
+    @Test
+    public void whenEvaluatingBoardPositionWithNoAdjacentEmptyLocationsThenAnExceptionIsThrown() {
+        Exception thrown = null;
+        try {
+            board = new char[][] {
+                {'S', ' ', 'W', 'W'},
+                {'W', 'W', 'W', 'E'}
+            };
+            this.follower = new Follower(this.board);
+            this.follower.takeNextStep();
+            this.follower.takeNextStep();
+        } catch (Exception ex) {
+            thrown = ex;
+        }
+        assertNotEquals(thrown, null);
     }
 }
