@@ -28,20 +28,19 @@ public class Follower {
 
         for (int indexY = 0; indexY < this.board.length; indexY++) {
             for (int indexX = 0; indexX < this.board[indexY].length; indexX++) {
-            if (this.board[indexY][indexX] == 'S') {
-                current.setX(indexX);
-                current.setY(indexY);
+                if (this.board[indexY][indexX] == 'S') {
+                    moveTo(indexX, indexY);
+                }
             }
         }
     }
-}
 
     public boolean hasBoard() {
         return true;
     }
 
     public Location getCurrentLocation() {
-        return current;
+        return new Location(current);
     }
 
     public Location takeNextStep() throws Exception {
@@ -55,16 +54,27 @@ public class Follower {
                     ))
                 );
                 if (this.board[indexY][indexX] == ' ' && isAdjacent) {
-                    current.setX(indexX);
-                    current.setY(indexY);
-                    return current;
+                    update(current, '*');
+                    moveTo(indexX, indexY);
+                    update(current, 'C');
+                    return getCurrentLocation();
                 }
             }
         }
         throw new Exception();
     }
 
-	public Character getValueAtPreviousLocation(Location previous) {
-		return '*';
+    private void update(final Location at, final Character with) {
+        this.board[at.getY()][at.getX()] = with;
+    }
+
+    private void moveTo(final int x, final int y) {
+        this.current.setX(x);
+        this.current.setY(y);
+    }
+
+	public Character getValueAtLocation(Location previous) {
+        final Character value = this.board[previous.getY()][previous.getX()];
+        return value;
 	}
 }

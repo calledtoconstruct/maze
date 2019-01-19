@@ -90,7 +90,7 @@ public class GivenCurrentLocationIsKnownTest {
         this.follower = new Follower(this.board);
         final Location previous = this.follower.getCurrentLocation();
         this.follower.takeNextStep();
-        final Character leftBehind = this.follower.getValueAtPreviousLocation(previous);
+        final Character leftBehind = this.follower.getValueAtLocation(previous);
         assertEquals(leftBehind, '*');
     }
 
@@ -103,10 +103,7 @@ public class GivenCurrentLocationIsKnownTest {
         this.follower = new Follower(this.board);
         this.follower.takeNextStep();
         final Location current = this.follower.getCurrentLocation();
-        // TODO: Ask for the value at a specific location
-        // TODO: Verify that the letter 'C' exists at
-        // the appropriate location
-        final Character currentValue = this.follower.???();
+        final Character currentValue = this.follower.getValueAtLocation(current);
         assertEquals(currentValue, 'C');
     }
 
