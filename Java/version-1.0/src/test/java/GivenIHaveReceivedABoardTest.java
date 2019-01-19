@@ -35,7 +35,7 @@ public class GivenIHaveReceivedABoardTest {
     @MethodSource("getParameters")
     public void thenThrowAnException(InvalidBoard invalidBoard) {
         try {
-            final Follower follower = new Follower(invalidBoard.getBoard());
+            new Follower(invalidBoard.getBoard());
         } catch (Exception ex) {
             thrown = ex;
         }
