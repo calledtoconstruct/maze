@@ -43,4 +43,10 @@ public class Follower {
     public Location getCurrentLocation() {
         return current;
     }
+
+    public Location takeNextStep() {
+        current.setX(2);
+        current.setY(0);
+        return current;
+    }
 }
