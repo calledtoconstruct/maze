@@ -63,4 +63,8 @@ public class Follower {
         }
         throw new Exception();
     }
+
+	public Character getValueAtPreviousLocation(Location previous) {
+		return '*';
+	}
 }

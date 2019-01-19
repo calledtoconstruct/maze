@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class GivenCurrentLocationIsKnownTest {
@@ -64,4 +63,51 @@ public class GivenCurrentLocationIsKnownTest {
         }
         assertNotEquals(thrown, null);
     }
+
+
+    // Before
+        // board = new char[][] {
+        //     {'S', ' ', ' ', 'E'},
+        //     {'W', 'W', 'W', 'W'}
+        // };
+    // After
+        // board = new char[][] {
+        //     {'*', 'C', ' ', 'E'},
+        //     {'W', 'W', 'W', 'W'}
+        // };
+    // After another step
+        // board = new char[][] {
+        //     {'*', '*', 'C', 'E'},
+        //     {'W', 'W', 'W', 'W'}
+        // };
+
+    @Test
+    public void whenMovingToTheNextSpaceThenBreadcrumbIsLeftBehind() throws Exception {
+        board = new char[][] {
+            {'S', ' ', ' ', 'E'},
+            {'W', 'W', 'W', 'W'}
+        };
+        this.follower = new Follower(this.board);
+        final Location previous = this.follower.getCurrentLocation();
+        this.follower.takeNextStep();
+        final Character leftBehind = this.follower.getValueAtPreviousLocation(previous);
+        assertEquals(leftBehind, '*');
+    }
+
+    @Test
+    public void whenMovingToTheNextSpaceThenMyCurrentPositionIsMarked() throws Exception {
+        board = new char[][] {
+            {'S', ' ', ' ', 'E'},
+            {'W', 'W', 'W', 'W'}
+        };
+        this.follower = new Follower(this.board);
+        this.follower.takeNextStep();
+        final Location current = this.follower.getCurrentLocation();
+        // TODO: Ask for the value at a specific location
+        // TODO: Verify that the letter 'C' exists at
+        // the appropriate location
+        final Character currentValue = this.follower.???();
+        assertEquals(currentValue, 'C');
+    }
+
 }
