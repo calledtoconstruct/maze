@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class GivenIDoNotHaveABoardTest {
 
-    private final char[] board = new char[] { 'S', 'E' };
+    private final char[][] board = new char[][]{{ 'S', 'E' }};
     private Follower follower = null;
 
     @BeforeEach

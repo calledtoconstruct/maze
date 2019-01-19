@@ -6,13 +6,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class InvalidBoard {
-    private final char[] board;
+    private final char[][] board;
 
-    public InvalidBoard(final char[] board) {
+    public InvalidBoard(final char[][] board) {
         this.board = board;
     }
 
-    char[] getBoard() { 
+    char[][] getBoard() { 
         return this.board;
     }
 }
@@ -23,10 +23,10 @@ public class GivenIHaveReceivedABoardTest {
 
     public static Stream<InvalidBoard> getParameters() {
         return Stream.of(
-            new InvalidBoard(new char[] { 'W', 'W' }),
-            new InvalidBoard(new char[] { 'W', 'S' }),
-            new InvalidBoard(new char[] { 'W', 'E' }),
-            new InvalidBoard(new char[0]),
+            new InvalidBoard(new char[][] {{ 'W', 'W' }}),
+            new InvalidBoard(new char[][] {{ 'W', 'S' }}),
+            new InvalidBoard(new char[][] {{ 'W', 'E' }}),
+            new InvalidBoard(new char[0][0]),
             new InvalidBoard(null)
         );
     }
