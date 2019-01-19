@@ -57,7 +57,7 @@ public class Follower {
                 if (this.board[indexY][indexX] == ' ' && isAdjacent) {
                     current.setX(indexX);
                     current.setY(indexY);
-                    // return current;
+                    return current;
                 }
             }
         }

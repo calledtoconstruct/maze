@@ -38,4 +38,17 @@ public class GivenCurrentLocationIsKnownTest {
         expectedLocation.setY(1);
         assertEquals(this.follower.getCurrentLocation(), expectedLocation);
     }
+ 
+    @Test
+    public void thenOnlyTheFirstAdjacentEmptyLocationIsReturned() throws Exception {
+        board = new char[][] {
+            {'S', ' ', ' ', 'E'},
+            {'W', 'W', 'W', 'W'}
+        };
+        this.follower = new Follower(this.board);
+        this.follower.takeNextStep();
+        expectedLocation.setX(1);
+        expectedLocation.setY(0);
+        assertEquals(this.follower.getCurrentLocation(), expectedLocation);
+    }
 }
