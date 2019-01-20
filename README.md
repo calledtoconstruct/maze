@@ -2,11 +2,17 @@
 A variety of implementations of an application that can walk thru a maze defined by the following:
 
 W - indicates a wall or obstruction
+
 S - indicates the one and only start position
+
 E - indicates the one and only end position
+
 [space] - indicates a pathway
-* - indicates a breadcrumb left behind after the runner passes thru
+
+\* - indicates a breadcrumb left behind after the runner passes thru
+
 C - indicates the current location of the runner
+
 
 Example:
 
